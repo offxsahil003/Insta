@@ -1,0 +1,4 @@
+instagrapi
+requests
+python-dotenv
+pillow
