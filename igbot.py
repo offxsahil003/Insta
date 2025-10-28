@@ -537,7 +537,7 @@ def watch_thread(cl, thread_id: str, is_group: bool, bot_start_time: float, thre
                     state_after = get_gc_user_state(thread_id_str, sender_id_str)  # refetch
                     if state_after['ai_enabled'] and not is_command(text_lower):
                         ai_reply = get_ai_response(thread_id_str, sender_id_str, text, cl)
-                        reply_msg = f"🤖 Answer:\n\n{ai_reply}"
+                        reply_msg = f"〄 The Reply:\n\n{ai_reply}"
                         try:
                             cl.direct_send(reply_msg, thread_ids=[int(thread_id)])
                         except Exception as e:
@@ -567,7 +567,7 @@ def watch_thread(cl, thread_id: str, is_group: bool, bot_start_time: float, thre
                         if dm_state['ai_enabled']:
                             ai_reply = get_ai_response(thread_id_str, sender_id_str, text, cl)
                             try:
-                                cl.direct_send(f"🤖 Answer:\n\n{ai_reply}", thread_ids=[int(thread_id)])
+                                cl.direct_send(f"〄 The Reply:\n\n{ai_reply}", thread_ids=[int(thread_id)])
                             except Exception as e:
                                 print("⚠️ Failed sending AI reply in DM:", e)
                         continue
