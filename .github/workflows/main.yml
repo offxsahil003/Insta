@@ -23,19 +23,21 @@ jobs:
           pip install -r requirements.txt
           pip install python-dotenv
 
-      - name: Load .env file manually
+      - name: Load .env variables globally
         run: |
-          echo "Loading environment variables from .env..."
-          set -a
-          source .env
-          set +a
-          echo "Environment loaded ✅"
+          echo "Loading .env into GitHub ENV..."
+          while IFS='=' read -r key value; do
+            if [[ ! "$key" =~ ^# && -n "$key" ]]; then
+              echo "$key=$value" >> $GITHUB_ENV
+            fi
+          done < .env
+          echo "✅ Environment variables loaded globally"
 
-      - name: Debug check
+      - name: Debug environment
         run: |
-          echo "IG_USERNAME=$IG_USERNAME"
-          echo "IG_PASSWORD=$IG_PASSWORD"
-          echo "GROQ_API_KEY=$GROQ_API_KEY"
+          echo "IG_USERNAME: $IG_USERNAME"
+          echo "IG_PASSWORD: $IG_PASSWORD"
+          echo "GROQ_API_KEY: $GROQ_API_KEY"
 
       - name: Run Bot
         run: |
