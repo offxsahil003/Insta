@@ -1,1 +1,1 @@
-worker: python igbot.py
+web: bash start.sh
